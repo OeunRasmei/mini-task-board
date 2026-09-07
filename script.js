@@ -5,8 +5,12 @@ const count = document.querySelector("#taskCount");
 const clearCompleted = document.querySelector("#clearCompleted");
 const filterButtons = [...document.querySelectorAll(".filter")];
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let currentFilter = "all";
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 function render() {
   const visibleTasks = tasks.filter((task) => {
@@ -24,8 +28,10 @@ function render() {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = task.completed;
+
     checkbox.addEventListener("change", () => {
       task.completed = checkbox.checked;
+      saveTasks();
       render();
     });
 
@@ -36,8 +42,10 @@ function render() {
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete";
     deleteButton.textContent = "Delete";
+
     deleteButton.addEventListener("click", () => {
       tasks = tasks.filter((item) => item.id !== task.id);
+      saveTasks();
       render();
     });
 
@@ -60,6 +68,8 @@ form.addEventListener("submit", (event) => {
     completed: false,
   });
 
+  saveTasks();
+
   input.value = "";
   render();
 });
@@ -77,6 +87,7 @@ filterButtons.forEach((button) => {
 
 clearCompleted.addEventListener("click", () => {
   tasks = tasks.filter((task) => !task.completed);
+  saveTasks();
   render();
 });
 
