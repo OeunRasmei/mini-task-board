@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Task Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <p class="eyebrow">GitHub Practice Project</p>
+      <h1>Mini Task Board</h1>
+      <p class="subtitle">A tiny project for practicing issues, branches, pull requests and collaboration.</p>
+    </header>
+
+    <form id="taskForm" class="task-form">
+      <input id="taskInput" type="text" placeholder="What needs to be done?" autocomplete="off" />
+      <button type="submit">Add task</button>
+    </form>
+
+    <div class="toolbar">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="active">Active</button>
+      <button class="filter" data-filter="completed">Completed</button>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
+
+    <footer>
+      <span id="taskCount">0 tasks</span>
+      <button id="clearCompleted" class="text-button">Clear completed</button>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
